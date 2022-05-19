@@ -21,10 +21,10 @@ const CustomProductInfoCard = styled(CustomCard)`
 
 const Details = () => {
 
-  const { details, product } = DetailsHooks();
+  const { details, product, isLoading } = DetailsHooks();
   const categories = product.categories || getCategoriesOfLocaStorage();
 
-  return (
+  return !isLoading && (
     <>
       <Box>
         <Breadcrumb {...{ categories }} />

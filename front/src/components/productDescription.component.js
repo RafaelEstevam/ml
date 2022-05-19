@@ -26,7 +26,7 @@ const ProductDescription = ({ details }) => {
   return (
     <ProductDescriptionWrapper>
       <ProductDescriptionTitle>
-        {details?.subtitle}
+        Descrição do produto
       </ProductDescriptionTitle>
       <ProductDescriptionDescription>
         {details?.description}

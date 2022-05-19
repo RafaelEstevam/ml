@@ -78,7 +78,6 @@ const ProductInfo = ({ details }) => {
               {`,${details?.price?.decimals}`}
             </ProductInfoPriceDecimal>
           )}
-
         </ProductInfoPrice>
         <ProductForm>
           <ProductButton type='submit'>

@@ -6,18 +6,19 @@ const DetailsHooks = () => {
 
   const { id } = useParams();
   const [details, setDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const product = useSelector(state => state.product.value);
 
   const handleSearchById = async (productId) => {
     try {
       await API.get(`/items/${productId}`).then((response) => {
         setDetails(response.data);
+        setIsLoading(false);
       })
     } catch (e) {
       console.log(e.message)
     }
   }
-
 
   useEffect(() => {
     handleSearchById(id)
@@ -25,7 +26,8 @@ const DetailsHooks = () => {
 
   return {
     details,
-    product
+    product,
+    isLoading
   };
 
 };
