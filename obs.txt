@@ -1,0 +1,4 @@
+MLA1124729183 - Produto sem descrição
+Apple Iphone - Consulta sem categorias
+Apple Ipod - O category_id do produto não corresponde as categorias listadas na api
+Qualquer produto - O produto só possui um category_id em seu payload, portanto, não dá para determinar qual seria sua categoria

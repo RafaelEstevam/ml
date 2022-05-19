@@ -33,7 +33,9 @@ const Details = () => {
             <ProductInfo {...{ details: details.item }} />
           </CustomProductInfoCard>
           <CustomProductInfoCard>
-            <ProductDescription {...{ details: details.item }} />
+            {details.item.description && (
+              <ProductDescription {...{ details: details.item }} />
+            )}
           </CustomProductInfoCard>
         </CustomProductInfo>
       </Box>

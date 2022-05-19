@@ -34,7 +34,7 @@ const productItem = (data) => {
     return itemReturn;
 }
 
-module.exports = {
+const items = {
     async getItems(req, res) {
         const { Q } = req.query;
         try {
@@ -60,20 +60,48 @@ module.exports = {
         }
     },
 
-    async getItemById(req, res) {
-        const { id } = req.params;
-        try {
-            const { data } = await API.get(`/items/${id}`);
-            const descriptionData = await API.get(`/items/${id}/description`);
-
-            const response = {
+    async getDescriptionById(id, data, res) {
+        await API.get(`/items/${id}/description`).then((response) => {
+            const descriptionData = response;
+            const responseData = {
                 autor: autor,
                 item: productItem({ ...data, ...{ description: descriptionData } })
             }
+            res.json(responseData);
+        }).catch((e) => {
+            const responseData = {
+                autor: autor,
+                item: productItem({ ...data })
+            };
+            res.json(responseData);
+        })
+    },
 
-            res.json(response);
-        } catch (e) {
+    async getItemById(req, res) {
+        const { id } = req.params;
+
+        await API.get(`/items/${id}`).then((response) => {
+            const { data } = response;
+            items.getDescriptionById(id, data, res)
+        }).catch((e) => {
             res.status(400).send(e.message)
-        }
+        })
+
+
+        // try {
+        //     const { data } = await API.get(`/items/${id}`);
+        //     const descriptionData = await API.get(`/items/${id}/description`);
+
+        //     const response = {
+        //         autor: autor,
+        //         // item: productItem({ ...data, ...{ description: descriptionData } })
+        //     }
+
+        //     res.json(response);
+        // } catch (e) {
+        //     res.status(400).send(e.message)
+        // }
     }
 }
+
+module.exports = items
