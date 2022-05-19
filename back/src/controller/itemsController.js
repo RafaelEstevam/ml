@@ -23,7 +23,7 @@ const productItem = (data) => {
         price: {
             currency: currency_id,
             amount: parseInt(price?.toString()?.split('.')[0], 10),
-            decimals: parseInt(price?.toString()?.split('.')[1], 10),
+            decimals: parseInt(price?.toString()?.split('.')[1], 10) || '00',
         },
         picture: pictures && pictures[0]?.url || thumbnail,
         condition,
