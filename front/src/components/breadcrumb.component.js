@@ -32,21 +32,19 @@ const CustomListItem = styled('li')`
   }
 `
 
-const mockBreadcrumb = [
-  { link: "/", label: "Electrônica, Audio y Video" },
-  { link: "/", label: "iPod" },
-  { link: "/", label: "Reproductores" },
-  { link: "/", label: "iPod touch" },
-  { link: "/", label: "32 GB" }
-]
+const Breadcrumb = ({ categories }) => {
 
-const Breadcrumb = ({ listNavigation }) => {
+  const size = 5;
+  const items = categories?.slice(0, size).map(i => {
+    return i
+  });
+
   return (
     <>
       <nav>
         <CustomList>
-          {mockBreadcrumb.map((item) => (
-            <CustomListItem key={item.label}>{item.label}</CustomListItem>
+          {items?.map((item) => (
+            <CustomListItem key={item}>{item}</CustomListItem>
           ))}
         </CustomList>
       </nav>

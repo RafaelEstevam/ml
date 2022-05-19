@@ -22,14 +22,14 @@ const ProductDescriptionDescription = styled('p')`
   font-size: ${SPECIFICATIONS.fontSize16};
 `
 
-const ProductDescription = ({ mockProductInfo }) => {
+const ProductDescription = ({ details }) => {
   return (
     <ProductDescriptionWrapper>
       <ProductDescriptionTitle>
-        {mockProductInfo.subtitle}
+        {details?.subtitle}
       </ProductDescriptionTitle>
       <ProductDescriptionDescription>
-        {mockProductInfo.description}
+        {details?.description}
       </ProductDescriptionDescription>
     </ProductDescriptionWrapper>
   )

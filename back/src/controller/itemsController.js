@@ -8,14 +8,15 @@ const autor = {
 }
 
 const orderByQuantity = categories => {
-    const list = categories.sort(function (a, b) {
+    const list = categories?.sort(function (a, b) {
         return b.results - a.results;
     });
     return list;
 };
 
 const productItem = (data) => {
-    const { id, title, price, currency_id, condition, shipping, sold_quantity, description, pictures, thumbnail, category_id } = data;
+    const { id, title, price, currency_id, condition, shipping, sold_quantity, description, pictures, thumbnail } = data;
+
     const itemReturn = {
         id,
         title,
@@ -28,7 +29,7 @@ const productItem = (data) => {
         condition,
         free_shipping: shipping.free_shipping,
         sold_quantity,
-        description: description && description.plain_text
+        description: description && description?.data?.plain_text
     }
     return itemReturn;
 }
@@ -40,7 +41,7 @@ module.exports = {
             const queryResponse = await API.get(`/sites/MLA/search?q=:${Q}&limit=4`);
             const { available_filters } = queryResponse.data;
 
-            categories = orderByQuantity(available_filters.find((item) => { return item.id === 'category' }).values);
+            categories = orderByQuantity(available_filters.find((item) => { return item.id === 'category' })?.values);
 
             const listResponse = queryResponse.data.results.map((item) => {
                 return {
@@ -50,12 +51,12 @@ module.exports = {
 
             const response = {
                 autor: autor,
-                categories: categories.map((item) => { return item.name }),
+                categories: categories?.map((item) => { return item.name }),
                 items: listResponse
             };
             res.json(response);
         } catch (e) {
-            res.send(e.message)
+            res.status(400).send(e.message)
         }
     },
 
@@ -64,13 +65,15 @@ module.exports = {
         try {
             const { data } = await API.get(`/items/${id}`);
             const descriptionData = await API.get(`/items/${id}/description`);
+
             const response = {
                 autor: autor,
                 item: productItem({ ...data, ...{ description: descriptionData } })
             }
+
             res.json(response);
         } catch (e) {
-            res.send(e.message)
+            res.status(400).send(e.message)
         }
     }
 }

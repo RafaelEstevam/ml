@@ -6,6 +6,8 @@ import { SPECIFICATIONS } from '../../styles/config';
 import Breadcrumb from '../../components/breadcrumb.component';
 import ProductInfo from '../../components/productInfo.component';
 import ProductDescription from '../../components/productDescription.component';
+import DetailsHooks from '../../hooks/details.hooks';
+import { getCategoriesOfLocaStorage } from '../../services/localStorage';
 
 const CustomProductInfo = styled(CustomProductList)`
   display: block;
@@ -17,26 +19,21 @@ const CustomProductInfoCard = styled(CustomCard)`
   padding-right: ${SPECIFICATIONS.marginPadding32};
 `
 
-const mockProductInfo = {
-  title: "Deco Reverse Sombrero Oxford",
-  status: "NEW",
-  sellered: "234",
-  price: "1.980",
-  subtitle: "Descripción del producto",
-  description: "The Scarpe di Bianco Italian footwear collection was founded by Bill White in 2009. Di Bianco offers classic handmade men's shoes with a modern twist. The combination of timeless models and details with contemporary colors and styling, results in decidedly current, yet, elegant models. The aim of the Scarpe di Bianco company is to offer men a custom shoe buying experience through a multitude of models, last, soles, leathers, and color options."
-}
-
 const Details = () => {
+
+  const { details, product } = DetailsHooks();
+  const categories = product.categories || getCategoriesOfLocaStorage();
+
   return (
     <>
       <Box>
-        <Breadcrumb />
+        <Breadcrumb {...{ categories }} />
         <CustomProductInfo>
           <CustomProductInfoCard>
-            <ProductInfo {...{ mockProductInfo }} />
+            <ProductInfo {...{ details: details.item }} />
           </CustomProductInfoCard>
           <CustomProductInfoCard>
-            <ProductDescription {...{ mockProductInfo }} />
+            <ProductDescription {...{ details: details.item }} />
           </CustomProductInfoCard>
         </CustomProductInfo>
       </Box>

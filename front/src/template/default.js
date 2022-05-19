@@ -18,7 +18,9 @@ const Default = ({ children }) => {
       <CustomMain>
         <Layout>
           <GridComponent>
-            {children}
+            <React.Fragment>
+              {children}
+            </React.Fragment>
           </GridComponent>
         </Layout>
       </CustomMain>

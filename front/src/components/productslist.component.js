@@ -37,9 +37,19 @@ const CardContent = styled('div')`
 const CardPrice = styled(`span`)`
   font-size: ${SPECIFICATIONS.fontSize24};
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 `;
+
+const CardPriceValue = styled(CardPrice)`
+  gap: 2px;
+  align-items: start;
+`
+
+const CardPriceDecimal = styled(`span`)`
+  font-size: ${SPECIFICATIONS.fontSize12};
+  padding-top: 3px;
+`
 
 const CardShipping = styled('img')`
   min-width: 20px;
@@ -52,6 +62,7 @@ const CardTitle = styled(`h2`)`
   font-size: ${SPECIFICATIONS.fontSize18};
   color: ${COLORS.dark0};
   font-weight: normal;
+  cursor: pointer;
 `;
 
 const CardSeller = styled('p')`
@@ -77,45 +88,46 @@ const Border = styled('div')`
   background: ${COLORS.light};
 `
 
-const mockProductsList = [
-  { title: "Apple Ipod Touch 5g 16gb Negro Igual A Nuevo Completo Unico!", price: "1.980", seller: "Capital Federal", delivery: true, image: "http://teste.com" },
-  { title: "Apple Ipod Touch 5g 16gb Negro Igual A Nuevo Completo Unico!", price: "1.980", seller: "Capital Federal", delivery: false, image: "http://teste.com" },
-  { title: "Apple Ipod Touch 5g 16gb Negro Igual A Nuevo Completo Unico!", price: "1.980", seller: "Mendoza", delivery: true, image: "http://teste.com" },
-  { title: "Apple Ipod Touch 5g 16gb Negro Igual A Nuevo Completo Unico!", price: "1.980", seller: "Capital Federal", delivery: false, image: "http://teste.com" }
-]
+const ProductsList = ({ products, signature, handleClick }) => {
 
-const ProductsList = ({ lastItem }) => {
   return (
     <CustomProductList>
       {
-        mockProductsList.map((item) => (
-          <CustomCard>
+        products?.map(({ item }) => (
+          <CustomCard key={item.id}>
             <CardTemplate>
-              <ImgCard src={item.image} alt={item.title} />
+              <ImgCard src={item.picture} alt={item.title} />
               <CardWrapper>
                 <CardBox>
                   <CardContent>
                     <CardPrice>
-                      {`$ ${item.price}`}
-                      {item.delivery && (
+                      <CardPriceValue>
+                        {`$ ${item.price.amount}`}
+                        {item.price.decimals && (
+                          <CardPriceDecimal>
+                            {`,${item.price.decimals}`}
+                          </CardPriceDecimal>
+                        )}
+                      </CardPriceValue>
+                      {item.free_shipping && (
                         <CardShipping src={shipping} alt="Selo entrega" />
                       )}
                     </CardPrice>
-                    <CardTitle>
+                    <CardTitle onClick={() => handleClick(item)}>
                       {item.title}
                     </CardTitle>
                   </CardContent>
                   <CardSeller>
-                    {item.seller}
+                    {signature.autor}
                   </CardSeller>
                 </CardBox>
               </CardWrapper>
             </CardTemplate>
             <Border />
-          </CustomCard>
+          </CustomCard >
         ))
       }
-    </CustomProductList>
+    </CustomProductList >
   )
 };
 
