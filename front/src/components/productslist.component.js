@@ -63,6 +63,9 @@ const CardTitle = styled(`h2`)`
   color: ${COLORS.dark0};
   font-weight: normal;
   cursor: pointer;
+  :hover{
+    text-decoration: underline;
+  }
 `;
 
 const CardSeller = styled('p')`
