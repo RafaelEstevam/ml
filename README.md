@@ -22,7 +22,7 @@ O frontend se encontra em /front.
 
 ## Backend
 
-O backend se encontra em /backend. 
+O backend se encontra em /back. 
 
 ### Rodando o projeto
 
