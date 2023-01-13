@@ -34,10 +34,25 @@ export const loadingSlice = createSlice({
 
 export const { setShowLoading } = loadingSlice.actions
 
+export const resultsSlice = createSlice({
+  name: 'results',
+  initialState: {
+    value: false
+  },
+  reducers: {
+    setShowNoResults: (state, action) => {
+      const {show} = action.payload;
+      state.value = show;
+    },
+  }
+})
+
+export const { setShowNoResults } = resultsSlice.actions
 
 export default configureStore({
   reducer: {
     product: productSlice.reducer,
-    loading: loadingSlice.reducer
+    loading: loadingSlice.reducer,
+    results: resultsSlice.reducer
   }
 })

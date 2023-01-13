@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { setProduct, setShowLoading } from '../store/store';
+import { setProduct, setShowLoading, setShowNoResults } from '../store/store';
 
 import API from '../services/api';
 
@@ -21,6 +21,7 @@ const ListHooks = () => {
       });
     } catch (e) {
       console.log(e.message)
+      reduxDispatch(setShowNoResults({ show: true }))
     }finally{
       reduxDispatch(setShowLoading({ show: false }))
     }
@@ -35,6 +36,12 @@ const ListHooks = () => {
     const search = searchParams.get('Search');
     handleSearch(search);
   }, [searchParams]);
+
+  useEffect(() => {
+    if(list?.items?.length === 0){
+      reduxDispatch(setShowNoResults({ show: true }))
+    }
+  }, [list])
 
   return {
     list,

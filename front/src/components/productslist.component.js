@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { SPECIFICATIONS, COLORS } from '../styles/config';
 import { CustomProductList, CustomCard } from './components';
 import shipping from '../assets/ic_shipping.png';
+import { useSelector } from 'react-redux';
 
 const CardTemplate = styled('div')`
   display: flex;
@@ -93,7 +94,9 @@ const Border = styled('div')`
 
 const ProductsList = ({ products, signature, handleClick }) => {
 
-  return (
+  const noResults = useSelector(state => state.results.value);
+
+  return products?.length > 0 ? (
     <CustomProductList>
       {
         products?.map(({ item }) => (
@@ -131,6 +134,8 @@ const ProductsList = ({ products, signature, handleClick }) => {
         ))
       }
     </CustomProductList >
+  ) : noResults && (
+    <p>Não foi possível encontrar um produto com base na sua consulta.</p>
   )
 };
 
