@@ -20,6 +20,14 @@ O frontend se encontra em /front.
 - npm install
 - npm start
 
+### Variáveis de ambiente
+
+É necessário criar um arquivo de configuração .env para rodar o frontend.
+
+As varíaveis de ambiente são:
+
+REACT_APP_API: Endereço do backend que será integrado na aplicação. 
+
 ## Backend
 
 O backend se encontra em /back. 
