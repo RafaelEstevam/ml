@@ -7,6 +7,9 @@ import { Box } from '@mui/material';
 import Logo from './logo.component';
 import Search from './search.component';
 
+import {Loading} from './loading.component';
+
+
 const CustomHeader = styled('div')`
   background-color: ${COLORS.main};
   background-position: top center;
@@ -17,6 +20,8 @@ const CustomHeader = styled('div')`
 const Header = () => {
   return (
     <header>
+      <Loading show={true}/>
+
       <CustomHeader>
         <Layout>
           <GridComponent>

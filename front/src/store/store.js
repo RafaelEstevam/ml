@@ -13,14 +13,31 @@ export const productSlice = createSlice({
         localStorage.setItem('searchedCategories', '')
       }
       state.value = action.payload;
-    }
+    },
   }
 })
 
 export const { setProduct } = productSlice.actions
 
+export const loadingSlice = createSlice({
+  name: 'loading',
+  initialState: {
+    value: false
+  },
+  reducers: {
+    setShowLoading: (state, action) => {
+      const {show} = action.payload;
+      state.value = show;
+    },
+  }
+})
+
+export const { setShowLoading } = loadingSlice.actions
+
+
 export default configureStore({
   reducer: {
-    product: productSlice.reducer
+    product: productSlice.reducer,
+    loading: loadingSlice.reducer
   }
 })

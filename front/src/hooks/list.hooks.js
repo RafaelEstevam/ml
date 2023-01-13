@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { setProduct } from '../store/store';
+import { setProduct, setShowLoading } from '../store/store';
 
 import API from '../services/api';
 
@@ -13,12 +13,16 @@ const ListHooks = () => {
   const history = useNavigate();
 
   const handleSearch = async (search) => {
+    reduxDispatch(setShowLoading({ show: true }))
+
     try {
       await API.get(`/items?Q=${search}`).then((response) => {
         setList(response.data)
       });
     } catch (e) {
       console.log(e.message)
+    }finally{
+      reduxDispatch(setShowLoading({ show: false }))
     }
   }
 

@@ -28,12 +28,15 @@ const Search = () => {
   const { search, setSearch, handleSubmit } = SearchHooks();
 
   return (
-    <CustomForm onSubmit={handleSubmit}>
-      <CustomInput placeholder='Nunca dejes de buscar' value={search} onChange={(e) => setSearch(e.target.value)} required />
-      <CustomButton type='submit'>
-        <img src={searchIcom} alt="Search icon" />
-      </CustomButton>
-    </CustomForm>
+    <>
+      <CustomForm onSubmit={handleSubmit}>
+        <CustomInput placeholder='Nunca dejes de buscar' value={search} onChange={(e) => setSearch(e.target.value)} required />
+        <CustomButton type='submit'>
+          <img src={searchIcom} alt="Search icon" />
+        </CustomButton>
+      </CustomForm>
+    </>
+    
   )
 }
 

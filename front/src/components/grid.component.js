@@ -1,11 +1,11 @@
 import React from 'react';
 import { Grid, Box } from '@mui/material';
-// import GridOverlay from './gridOverlay.component';
+import GridOverlay from './gridOverlay.component';
 
 const GridComponent = ({ children }) => {
   return (
     <>
-      {/* <GridOverlay /> */}
+      <GridOverlay />
       <Grid container>
         <Grid item xs={1} />
         <Grid item xs={10} >
