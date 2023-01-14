@@ -8,10 +8,10 @@ function App() {
   const history = createBrowserHistory({ window });
 
   return (
-    <HistoryRouter history={history}>
-      <Routes />
-      <GlobalStyle />
-    </HistoryRouter>
+      <HistoryRouter history={history}>
+        <Routes />
+        <GlobalStyle />
+      </HistoryRouter>
   );
 }
 

@@ -23,9 +23,9 @@ export const DetailsContext = createContext();
 
 const Details = () => {
 
-  const { details, isLoading } = useDetailsHooks();
+  const { details, loading } = useDetailsHooks();
 
-  return !isLoading && (
+  return !loading && (
     <DetailsContext.Provider value={{details}}>
       <Box>
         <Breadcrumb />
@@ -34,7 +34,7 @@ const Details = () => {
             <ProductInfo />
           </CustomProductInfoCard>
           <CustomProductInfoCard>
-            {details.item.description && (
+            {details?.item?.description && (
               <ProductDescription />
             )}
           </CustomProductInfoCard>

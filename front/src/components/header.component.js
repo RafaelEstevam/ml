@@ -20,8 +20,7 @@ const CustomHeader = styled('div')`
 const Header = () => {
   return (
     <header>
-      <Loading show={true}/>
-
+      <Loading/>
       <CustomHeader>
         <Layout>
           <GridComponent>

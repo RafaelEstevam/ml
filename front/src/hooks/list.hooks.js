@@ -1,16 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-
-import { useDispatch } from 'react-redux';
-import { setShowLoading } from '../store/store';
+import {DefaultContext} from '../template/default';
 
 import API from '../services/api';
 
 import {setCategoriesOnLocalStorage} from '../services/localStorage';
 
 const useListHooks = () => {
-  const reduxDispatch = useDispatch();
   const history = useNavigate();
+  const {setLoading} = useContext(DefaultContext);
 
   const [list, setList] = useState('');
   const [noResults, setNoResults] = useState(false);
@@ -18,8 +16,7 @@ const useListHooks = () => {
   const [product, setProduct] = useState({});
 
   const handleSearch = async (search) => {
-    reduxDispatch(setShowLoading({ show: true }))
-
+    setLoading(true);
     try {
       await API.get(`/items?Q=${search}`).then((response) => {
         setList(response.data)
@@ -28,7 +25,7 @@ const useListHooks = () => {
       console.log(e.message)
       setNoResults(true);
     }finally{
-      reduxDispatch(setShowLoading({ show: false }))
+      setLoading(false);
     }
   }
 

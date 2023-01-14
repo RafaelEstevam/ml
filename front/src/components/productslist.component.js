@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { SPECIFICATIONS, COLORS } from '../styles/config';
 import { CustomProductList, CustomCard } from './components';
 import shipping from '../assets/ic_shipping.png';
-import { useSelector } from 'react-redux';
 
 import {ListContext} from '../views/List'
 
@@ -97,8 +96,6 @@ const Border = styled('div')`
 const ProductsList = () => {
 
   const {products, signature, handleClick, noResults} = useContext(ListContext);
-
-  // const noResults = useSelector(state => state.results.value);
 
   return products?.length > 0 ? (
     <CustomProductList>

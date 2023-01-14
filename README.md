@@ -22,7 +22,7 @@ Backend - Servidor em NodeJS que atua como proxy e integra com a API do Mercado 
 ## Tecnologias usadas no projeto
 
 - React Js
-- Redux
+- Context API
 - Styled Components
 - Axios
 - NodeJs

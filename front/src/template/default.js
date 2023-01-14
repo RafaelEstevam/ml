@@ -1,9 +1,12 @@
-import React from "react";
+import React, { createContext, useState } from "react";
+
 import styled from "styled-components";
 import { GridComponent } from "../components/grid.component";
 import Header from "../components/header.component";
 import Layout from "../components/layout.component";
 import { COLORS } from "../styles/config";
+
+export const DefaultContext = createContext();
 
 const CustomMain = styled('main')`
   background-color: ${COLORS.light};
@@ -12,8 +15,11 @@ const CustomMain = styled('main')`
 `
 
 const Default = ({ children }) => {
+
+  const [loading, setLoading] = useState(false);
+
   return (
-    <>
+    <DefaultContext.Provider value={{loading, setLoading}}>
       <Header />
       <CustomMain>
         <Layout>
@@ -22,7 +28,8 @@ const Default = ({ children }) => {
           </GridComponent>
         </Layout>
       </CustomMain>
-    </>
+    </DefaultContext.Provider>
+
   )
 };
 
