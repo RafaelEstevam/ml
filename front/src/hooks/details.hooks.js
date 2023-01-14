@@ -24,7 +24,6 @@ const useDetailsHooks = () => {
   }
 
   useEffect(() => {
-    console.log(id);
     handleSearchById(id)
   }, [id]);
 
