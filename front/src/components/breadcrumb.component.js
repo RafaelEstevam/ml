@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import styled from 'styled-components';
 import { getCategoriesOfLocaStorage } from '../services/localStorage';
 import { SPECIFICATIONS, COLORS } from '../styles/config';
-import {ListContext} from '../views/List'
+import {ListContext} from '../services/context';
 
 const CustomList = styled('ol')`
   list-style: none;

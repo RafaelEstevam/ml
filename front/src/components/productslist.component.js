@@ -4,7 +4,7 @@ import { SPECIFICATIONS, COLORS } from '../styles/config';
 import { CustomProductList, CustomCard } from './components';
 import shipping from '../assets/ic_shipping.png';
 
-import {ListContext} from '../views/List'
+import {ListContext} from '../services/context';
 
 const CardTemplate = styled('div')`
   display: flex;

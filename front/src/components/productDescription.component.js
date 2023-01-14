@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import styled from 'styled-components';
 import { COLORS, SPECIFICATIONS } from '../styles/config';
 
-import { DetailsContext } from '../views/Details';
+import { DetailsContext } from '../services/context';
 
 const ProductDescriptionWrapper = styled('div')`
   display: flex;

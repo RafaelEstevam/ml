@@ -3,8 +3,7 @@ import { Box } from '@mui/material';
 import Breadcrumb from '../../components/breadcrumb.component';
 import ProductsList from '../../components/productslist.component';
 import useListHooks from '../../hooks/list.hooks';
-
-export const ListContext = createContext();
+import {ListContext} from '../../services/context';
 
 const List = () => {
 

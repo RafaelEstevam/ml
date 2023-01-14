@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../services/api';
 
-import { DefaultContext } from '../template/default';
+import { DefaultContext } from "../services/context";
 
 const useDetailsHooks = () => {
 
@@ -11,7 +11,7 @@ const useDetailsHooks = () => {
   const [details, setDetails] = useState({});
 
   const handleSearchById = async (productId) => {
-    setLoading(true);
+    setLoading({type: "show"});
     try {
       await API.get(`/items/${productId}`).then((response) => {
         setDetails(response.data);
@@ -19,7 +19,7 @@ const useDetailsHooks = () => {
     } catch (e) {
       console.log(e.message)
     }finally{
-      setLoading(false);
+      setLoading({type: "hide"});
     }
   }
 

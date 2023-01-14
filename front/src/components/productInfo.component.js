@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { COLORS, SPECIFICATIONS } from '../styles/config';
 import { translateStatus } from '../services/translateStatus';
 
-import { DetailsContext } from '../views/Details';
+import { DetailsContext } from '../services/context';
 
 const ProductInfoImg = styled('img')`
   background: ${COLORS.gray};

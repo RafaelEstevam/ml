@@ -7,7 +7,7 @@ import Breadcrumb from '../../components/breadcrumb.component';
 import ProductInfo from '../../components/productInfo.component';
 import ProductDescription from '../../components/productDescription.component';
 import useDetailsHooks from '../../hooks/details.hooks';
-import { getCategoriesOfLocaStorage } from '../../services/localStorage';
+import { DetailsContext } from '../../services/context';
 
 const CustomProductInfo = styled(CustomProductList)`
   display: block;
@@ -19,13 +19,11 @@ const CustomProductInfoCard = styled(CustomCard)`
   padding-right: ${SPECIFICATIONS.marginPadding32};
 `
 
-export const DetailsContext = createContext();
-
 const Details = () => {
 
-  const { details, loading } = useDetailsHooks();
+  const { details } = useDetailsHooks();
 
-  return !loading && (
+  return details?.item && (
     <DetailsContext.Provider value={{details}}>
       <Box>
         <Breadcrumb />

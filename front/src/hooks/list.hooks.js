@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import {DefaultContext} from '../template/default';
+import { DefaultContext } from "../services/context";
 
 import API from '../services/api';
 
@@ -16,7 +16,7 @@ const useListHooks = () => {
   const [product, setProduct] = useState({});
 
   const handleSearch = async (search) => {
-    setLoading(true);
+    setLoading({type: "show"});
     try {
       await API.get(`/items?Q=${search}`).then((response) => {
         setList(response.data)
@@ -25,7 +25,8 @@ const useListHooks = () => {
       console.log(e.message)
       setNoResults(true);
     }finally{
-      setLoading(false);
+      setLoading({type: "hide"});
+
     }
   }
 
