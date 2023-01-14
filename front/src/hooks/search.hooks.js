@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setShowLoading } from '../store/store';
-const SearchHooks = () => {
-  const reduxDispatch = useDispatch();
+
+const useSearchHooks = () => {
   const history = useNavigate();
   const [search, setSearch] = useState('');
 
@@ -19,4 +17,4 @@ const SearchHooks = () => {
   }
 };
 
-export default SearchHooks;
+export default useSearchHooks;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import searchIcom from '../assets/ic_Search.png';
 import { SPECIFICATIONS, COLORS } from '../styles/config';
-import SearchHooks from '../hooks/search.hooks';
+import useSearchHooks from '../hooks/search.hooks';
 
 const CustomForm = styled('form')`
   display: flex;
@@ -25,7 +25,7 @@ const CustomButton = styled('button')`
 `
 const Search = () => {
 
-  const { search, setSearch, handleSubmit } = SearchHooks();
+  const { search, setSearch, handleSubmit } = useSearchHooks();
 
   return (
     <>

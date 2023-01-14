@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import { COLORS, SPECIFICATIONS } from '../styles/config';
 import { translateStatus } from '../services/translateStatus';
+
+import { DetailsContext } from '../views/Details';
 
 const ProductInfoImg = styled('img')`
   background: ${COLORS.gray};
@@ -57,25 +59,27 @@ const ProductButton = styled('button')`
   border-radius: ${SPECIFICATIONS.borderRadius4};
 `
 
-const ProductInfo = ({ details }) => {
+const ProductInfo = () => {
+  
+  const {item} = useContext(DetailsContext).details;
 
   return (
     <>
-      <ProductInfoImg src={details?.picture} alt={details?.title} />
+      <ProductInfoImg src={item?.picture} alt={item?.title} />
       <ProductInfoDetails>
         <ProductInfoTitleWrapper>
           <ProductInfoSubtitle>
-            {`${translateStatus(details?.condition)} - ${details?.sold_quantity} vendidos`}
+            {`${translateStatus(item?.condition)} - ${item?.sold_quantity} vendidos`}
           </ProductInfoSubtitle>
           <ProductIntoTitle>
-            {details?.title}
+            {item?.title}
           </ProductIntoTitle>
         </ProductInfoTitleWrapper>
         <ProductInfoPrice>
-          {`$ ${details?.price?.amount}`}
-          {details?.price?.decimals && (
+          {`$ ${item?.price?.amount}`}
+          {item?.price?.decimals && (
             <ProductInfoPriceDecimal>
-              {`,${details?.price?.decimals}`}
+              {`,${item?.price?.decimals}`}
             </ProductInfoPriceDecimal>
           )}
         </ProductInfoPrice>

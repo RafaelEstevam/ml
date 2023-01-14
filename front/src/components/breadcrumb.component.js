@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import { getCategoriesOfLocaStorage } from '../services/localStorage';
 import { SPECIFICATIONS, COLORS } from '../styles/config';
+import {ListContext} from '../views/List'
 
 const CustomList = styled('ol')`
   list-style: none;
@@ -32,7 +34,9 @@ const CustomListItem = styled('li')`
   }
 `
 
-const Breadcrumb = ({ categories }) => {
+const Breadcrumb = () => {
+
+  const categories = useContext(ListContext)?.categories || getCategoriesOfLocaStorage()
 
   const size = 5;
   const items = categories?.slice(0, size).map(i => {

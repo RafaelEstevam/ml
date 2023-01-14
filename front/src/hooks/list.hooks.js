@@ -2,15 +2,20 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
-import { setProduct, setShowLoading, setShowNoResults } from '../store/store';
+import { setShowLoading } from '../store/store';
 
 import API from '../services/api';
 
-const ListHooks = () => {
+import {setCategoriesOnLocalStorage} from '../services/localStorage';
+
+const useListHooks = () => {
   const reduxDispatch = useDispatch();
-  const [list, setList] = useState('');
-  const [searchParams] = useSearchParams();
   const history = useNavigate();
+
+  const [list, setList] = useState('');
+  const [noResults, setNoResults] = useState(false);
+  const [searchParams] = useSearchParams();
+  const [product, setProduct] = useState({});
 
   const handleSearch = async (search) => {
     reduxDispatch(setShowLoading({ show: true }))
@@ -21,14 +26,17 @@ const ListHooks = () => {
       });
     } catch (e) {
       console.log(e.message)
-      reduxDispatch(setShowNoResults({ show: true }))
+      setNoResults(true);
     }finally{
       reduxDispatch(setShowLoading({ show: false }))
     }
   }
 
   const handleClick = (product) => {
-    reduxDispatch(setProduct({ item: product, categories: list.categories }))
+
+    setProduct({ item: product, categories: list.categories })
+    setCategoriesOnLocalStorage(list.categories);
+
     history(`/items/${product.id}`);
   }
 
@@ -39,15 +47,17 @@ const ListHooks = () => {
 
   useEffect(() => {
     if(list?.items?.length === 0){
-      reduxDispatch(setShowNoResults({ show: true }))
+      setNoResults(true);
     }
   }, [list])
 
   return {
     list,
     setList,
-    handleClick
+    handleClick,
+    noResults,
+    product
   }
 };
 
-export default ListHooks;
+export default useListHooks;

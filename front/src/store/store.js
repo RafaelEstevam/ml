@@ -1,24 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-export const productSlice = createSlice({
-  name: 'product',
-  initialState: {
-    value: {}
-  },
-  reducers: {
-    setProduct: (state, action) => {
-      if (action.payload.categories) {
-        localStorage.setItem('searchedCategories', action.payload.categories.toString())
-      } else {
-        localStorage.setItem('searchedCategories', '')
-      }
-      state.value = action.payload;
-    },
-  }
-})
-
-export const { setProduct } = productSlice.actions
-
 export const loadingSlice = createSlice({
   name: 'loading',
   initialState: {
@@ -34,25 +15,8 @@ export const loadingSlice = createSlice({
 
 export const { setShowLoading } = loadingSlice.actions
 
-export const resultsSlice = createSlice({
-  name: 'results',
-  initialState: {
-    value: false
-  },
-  reducers: {
-    setShowNoResults: (state, action) => {
-      const {show} = action.payload;
-      state.value = show;
-    },
-  }
-})
-
-export const { setShowNoResults } = resultsSlice.actions
-
 export default configureStore({
   reducer: {
-    product: productSlice.reducer,
-    loading: loadingSlice.reducer,
-    results: resultsSlice.reducer
+    loading: loadingSlice.reducer
   }
 })

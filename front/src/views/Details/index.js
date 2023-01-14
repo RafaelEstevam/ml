@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import styled from 'styled-components';
 import { Box } from '@mui/material';
 import { CustomProductList, CustomCard } from '../../components/components';
@@ -6,7 +6,7 @@ import { SPECIFICATIONS } from '../../styles/config';
 import Breadcrumb from '../../components/breadcrumb.component';
 import ProductInfo from '../../components/productInfo.component';
 import ProductDescription from '../../components/productDescription.component';
-import DetailsHooks from '../../hooks/details.hooks';
+import useDetailsHooks from '../../hooks/details.hooks';
 import { getCategoriesOfLocaStorage } from '../../services/localStorage';
 
 const CustomProductInfo = styled(CustomProductList)`
@@ -19,27 +19,28 @@ const CustomProductInfoCard = styled(CustomCard)`
   padding-right: ${SPECIFICATIONS.marginPadding32};
 `
 
+export const DetailsContext = createContext();
+
 const Details = () => {
 
-  const { details, product, isLoading } = DetailsHooks();
-  const categories = product.categories || getCategoriesOfLocaStorage();
+  const { details, isLoading } = useDetailsHooks();
 
   return !isLoading && (
-    <>
+    <DetailsContext.Provider value={{details}}>
       <Box>
-        <Breadcrumb {...{ categories }} />
+        <Breadcrumb />
         <CustomProductInfo>
           <CustomProductInfoCard>
-            <ProductInfo {...{ details: details.item }} />
+            <ProductInfo />
           </CustomProductInfoCard>
           <CustomProductInfoCard>
             {details.item.description && (
-              <ProductDescription {...{ details: details.item }} />
+              <ProductDescription />
             )}
           </CustomProductInfoCard>
         </CustomProductInfo>
       </Box>
-    </>
+    </DetailsContext.Provider>
   );
 }
 

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import { COLORS, SPECIFICATIONS } from '../styles/config';
+
+import { DetailsContext } from '../views/Details';
 
 const ProductDescriptionWrapper = styled('div')`
   display: flex;
@@ -22,14 +24,17 @@ const ProductDescriptionDescription = styled('p')`
   font-size: ${SPECIFICATIONS.fontSize16};
 `
 
-const ProductDescription = ({ details }) => {
+const ProductDescription = () => {
+
+  const {item} = useContext(DetailsContext).details;
+
   return (
     <ProductDescriptionWrapper>
       <ProductDescriptionTitle>
         Descrição do produto
       </ProductDescriptionTitle>
       <ProductDescriptionDescription>
-        {details?.description}
+        {item?.description}
       </ProductDescriptionDescription>
     </ProductDescriptionWrapper>
   )
